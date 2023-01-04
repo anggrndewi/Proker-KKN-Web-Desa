@@ -47,10 +47,6 @@
               <a class="nav-link" href="Riwayat.php">Riwayat</a>
             </li>
           </ul>
-          <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="btn btn-primary ml-lg-3" href="#">Login</a>
-          </ul>
         </div> <!-- .navbar-collapse -->
       </div> <!-- .container -->
     </nav>
@@ -61,11 +57,11 @@
       <div class="container text-center wow fadeInUp">
         <nav aria-label="Breadcrumb">
           <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0 mb-2">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+            <li class="breadcrumb-item"><a href="Beranda.php">Beranda</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Berita Terkini</li>
           </ol>
           </nav>
-        <h1 class="font-weight-normal">News</h1>
+        <h1 class="font-weight-normal">Berita Terkini</h1>
       </div> <!-- .container -->
     </div> <!-- .banner-section -->
   </div> <!-- .page-banner -->
@@ -175,50 +171,46 @@
                 <li><a href="#">Ocassion <span>14</span></a></li>
               </ul>
             </div>
+              <div class="sidebar-block">
+                <h3 class="sidebar-title">Recent Blog</h3>
+                <?php
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "webta";
 
-            <div class="sidebar-block">
-              <h3 class="sidebar-title">Recent Blog</h3>
-              <div class="blog-item">
-                <a class="post-thumb" href="">
-                  <img src="Gambar/<?php echo $row['Gambar']?>" alt="">
-                </a>
-                <div class="content">
-                  <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
-                  <div class="meta">
-                    <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
-                    <a href="#"><span class="mai-person"></span> Admin</a>
-                    <a href="#"><span class="mai-chatbubbles"></span> 19</a>
-                  </div>
-                </div>
-              </div>
-              <div class="blog-item">
-                <a class="post-thumb" href="">
-                  <img src="../assets/img/blog/blog_2.jpg" alt="">
-                </a>
-                <div class="content">
-                  <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
-                  <div class="meta">
-                    <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
-                    <a href="#"><span class="mai-person"></span> Admin</a>
-                    <a href="#"><span class="mai-chatbubbles"></span> 19</a>
-                  </div>
-                </div>
-              </div>
-              <div class="blog-item">
-                <a class="post-thumb" href="">
-                  <img src="../assets/img/blog/blog_3.jpg" alt="">
-                </a>
-                <div class="content">
-                  <h5 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h5>
-                  <div class="meta">
-                    <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
-                    <a href="#"><span class="mai-person"></span> Admin</a>
-                    <a href="#"><span class="mai-chatbubbles"></span> 19</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            // Create connection
+            $conn = mysqli_connect($servername, $username, $password, $dbname);
+            // Check connection
+            if (!$conn) {
+              die("Connection failed: " . mysqli_connect_error());
+            }
 
+            $sql = "SELECT * FROM webta ORDER BY Waktu DESC LIMIT 3"; 
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0 ) { //perulangan
+              // output data of each row
+              while($row = mysqli_fetch_assoc($result)) { //looping
+            ?>
+                <div class="blog-item">
+                  <a class="post-thumb" href="">
+                    <img src="Gambar/<?php echo $row['Gambar']?>" alt="">
+                  </a>
+                  <div class="content">
+                    <h5 class="post-title"><a href="blog-details.php? idn=<?php echo $row['id'] ?>"><?php echo $row['Nama_berita']?></a></h5>
+                    <div class="meta">
+                      <a href="#"><span class="mai-calendar"></span> <?php echo $row['Waktu'] ?></a>
+                      <a href="#"><span class="mai-person"></span> Admin</a>
+                      <a href="#"><span class="mai-chatbubbles"></span> 19</a>
+                    </div>
+                  </div>
+                </div> 
+                <?php
+                }
+              }
+            ?>
+              </div>
             <div class="sidebar-block">
               <h3 class="sidebar-title">Tag Cloud</h3>
               <div class="tagcloud">
@@ -243,114 +235,15 @@
     </div> <!-- .container -->
   </div> <!-- .page-section -->
 
-    <div class="page-section">
-          <h1 class="font-weight-normal">News</h1>
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="row">
-                        
-                    <?php
-                    $sql = "SELECT * FROM webta WHERE  Tipe='Kesehatan'"; 
-                    $result = mysqli_query($conn, $sql);
-                    
-                    if (mysqli_num_rows($result) > 0) { //perulangan
-                        $No = 1;
-                      // output data of each row
-                      while($row = mysqli_fetch_assoc($result)) { //looping
-                    
-                    ?>
-                        
-                      <div class="col-sm-6 py-3">
-                          <div class="card-blog">
-                            <div class="header">
-                              <div class="post-category">
-                                <a href="#"><?php echo $row['Tipe'] ?> </a>
-                              </div>
-                              <a href="blog-details" class="post-thumb">
-                                <img src="Gambar/<?php echo $row['Gambar']?>" alt="">
-                              </a>
-                            </div>
-                            <div class="body">
-                              <h5 class="post-title"><a href="blog-details.php? idn=<?php echo $row['id'] ?> "> <?php echo $row['Nama_berita'] ?> </a></h5>
-                              <div class="site-info">
-                                <div class="avatar mr-2">
-                                  <div class="avatar-img">
-                                    <img src="../assets/img/person/person_1.jpg" alt="">
-                                  </div>
-                                  <span><?php echo $row['Nama_upload'] ?> </span>
-                                </div>
-                                <span class="mai-time"></span> <?php echo $row['Waktu'] ?>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-              
-              <?php
-                }
-              }?>
-
-            
-      </div> <!-- .row -->
-    </div> <!-- .container -->
-  </div> <!-- .banner-home -->
-
-  <div class="page-section banner-home bg-image" style="background-image: url(../assets/img/banner-pattern.svg);">
-    <div class="container py-5 py-lg-0">
-      <div class="row align-items-center">
-        <div class="col-lg-4 wow zoomIn">
-          <div class="img-banner d-none d-lg-block">
-            <img src="../assets/img/mobile_app.png" alt="">
-          </div>
-        </div>
-        <div class="col-lg-8 wow fadeInRight">
-          <h1 class="font-weight-normal mb-3">Get easy access of all features using One Health Application</h1>
-          <a href="#"><img src="../assets/img/google_play.svg" alt=""></a>
-          <a href="#" class="ml-2"><img src="../assets/img/app_store.svg" alt=""></a>
-        </div>
-          
-          </div>
-        </div> 
-      </div> <!-- .row -->
-    </div> <!-- .container -->
-  </div> <!-- .page-section -->
-
   <footer class="page-footer">
-    <div class="container">
-      <div class="row px-md-3">
+   
         <div class="col-sm-6 col-lg-3 py-3">
-          <h5>Company</h5>
-          <ul class="footer-menu">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Career</a></li>
-            <li><a href="#">Editorial Team</a></li>
-            <li><a href="#">Protection</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-6 col-lg-3 py-3">
-          <h5>More</h5>
-          <ul class="footer-menu">
-            <li><a href="#">Terms & Condition</a></li>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Advertise</a></li>
-            <li><a href="#">Join as Doctors</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-6 col-lg-3 py-3">
-          <h5>Our partner</h5>
-          <ul class="footer-menu">
-            <li><a href="#">One-Fitness</a></li>
-            <li><a href="#">One-Drugs</a></li>
-            <li><a href="#">One-Live</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-6 col-lg-3 py-3">
-          <h5>Contact</h5>
-          <p class="footer-link mt-2">351 Willow Street Franklin, MA 02038</p>
+          <h5>Hubungi Kami</h5>
+          <p class="footer-link mt-2">Desa Negara Ratu Wates, Tegineneng, Pesawaran, Lampung.</p>
           <a href="#" class="footer-link">701-573-7582</a>
           <a href="#" class="footer-link">healthcare@temporary.net</a>
 
-          <h5 class="mt-3">Social Media</h5>
+          <h5 class="mt-3">Media Sosial Kami</h5>
           <div class="footer-sosmed mt-3">
             <a href="#" target="_blank"><span class="mai-logo-facebook-f"></span></a>
             <a href="#" target="_blank"><span class="mai-logo-twitter"></span></a>
@@ -363,9 +256,8 @@
 
       <hr>
 
-      <p id="copyright">Copyright &copy; 2020 <a href="https://macodeid.com/" target="_blank">MACode ID</a>. All right reserved</p>
-    </div> <!-- .container -->
-  </footer> <!-- .page-footer -->
+    </div>
+  </footer>
 
 <script src="../assets/js/jquery-3.5.1.min.js"></script>
 
