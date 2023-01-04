@@ -51,7 +51,7 @@ if (mysqli_num_rows($result) > 0) { //perulangan
 
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
       <div class="container">
-        <a class="navbar-brand" href="#"><span class="text-primary">Help</span>-doc</a>
+        <a class="navbar-brand" href="#"><span class="text-primary">Negara Ratu Wates</span>-Lampung</a>
 
         <!-- <form action="#">
           <div class="input-group input-navbar">
