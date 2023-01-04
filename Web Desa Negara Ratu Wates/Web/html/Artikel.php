@@ -41,7 +41,7 @@
               <a class="nav-link" href="Artikel.php">Berita Terkini</a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="Aplikasi.php">Peta Desa</a>
+              <a class="nav-link" href="PetaDesa.php">Peta Desa</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="Riwayat.php">Riwayat</a>

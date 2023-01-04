@@ -72,7 +72,7 @@ if (mysqli_num_rows($result) > 0) { //perulangan
               <a class="nav-link" href="Beranda.php">Beranda</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Aplikasi.php">Aplikasi</a>
+              <a class="nav-link" href="PetaDesa.php">Peta Desa</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="Artikel.php">Artikel</a>
